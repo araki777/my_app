@@ -1,7 +1,6 @@
-import { NavigationBar } from "./components/NavigationBar";
+import ReactDOM from "react-dom/client";
+import AppProviders from "./provider/AppProviders";
 
-function App() {
-  return <NavigationBar />;
-}
-
-export default App;
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <AppProviders />
+);

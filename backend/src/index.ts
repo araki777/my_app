@@ -80,13 +80,14 @@ app.delete("/users/:id", async (req, res) => {
 
 // メニュー作成
 app.post("/menus", async (req, res) => {
-  const { id, name, authorId } = req.body;
+  const { id, name, authorId, icon } = req.body;
   try {
     const menu = await prisma.menu.create({
       data: {
         id,
         name,
         authorId,
+        icon
       },
     });
     return res.json(menu);

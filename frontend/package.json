@@ -11,16 +11,23 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@mantine/core": "^5.4.0",
+    "@mantine/dropzone": "^5.4.1",
     "@mantine/hooks": "^5.4.0",
     "axios": "^0.27.2",
+    "encoding-japanese": "^2.0.0",
+    "papaparse": "^5.3.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.1"
   },
   "devDependencies": {
     "@mantine/ds": "^5.4.0",
     "@tabler/icons": "^1.100.0",
+    "@types/encoding-japanese": "^2.0.0",
+    "@types/papaparse": "^5.3.5",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^2.1.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"

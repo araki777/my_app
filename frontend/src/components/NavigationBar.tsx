@@ -121,10 +121,6 @@ export function NavigationBar() {
       });
   }, []);
 
-  function iconSelect(icon: string) {
-    return menuIcons[icon];
-  }
-
   const links = menu.map((item) => (
     <a
       className={cx(classes.link, {
