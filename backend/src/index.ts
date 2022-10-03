@@ -6,9 +6,11 @@ const app = express();
 const port = 3000;
 const prisma = new PrismaClient();
 
+app.use(express.json());
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://127.0.0.1:5173",
     credentials: true,
     optionsSuccessStatus: 200,
   })
@@ -80,13 +82,13 @@ app.delete("/users/:id", async (req, res) => {
 
 // メニュー作成
 app.post("/menus", async (req, res) => {
-  const { id, name, authorId, icon } = req.body;
+  const { id, name, userId, icon } = req.body;
   try {
     const menu = await prisma.menu.create({
       data: {
         id,
         name,
-        authorId,
+        userId,
         icon
       },
     });
@@ -102,10 +104,45 @@ app.get("/menus/:id", async (req, res) => {
   try {
     const user = await prisma.menu.findMany({
       where: {
-        authorId: id as number,
+        userId: id as number,
       },
     });
     return res.json(user);
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+});
+
+app.get("/files/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  try {
+    const files = await prisma.file.findMany({
+      where: {
+        userId: id
+      }
+    });
+    return res.json(files)
+  } catch (e) {
+    return res.status(400).json(e)
+  }
+})
+
+app.post("/files/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  try {
+    const file = await prisma.file.create({
+      data: {
+        name: req.body.name,
+        userId: id
+      }
+    });
+    await prisma.fileDetails.create({
+      data: {
+        fileId: file.id,
+        fileJson: req.body.fileData
+      }
+    });
+    return res.json(file);
   } catch (e) {
     return res.status(400).json(e);
   }

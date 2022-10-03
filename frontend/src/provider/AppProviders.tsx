@@ -1,11 +1,10 @@
-import { BrowserRouter } from 'react-router-dom';
-import MyAppShell from '../components/MyAppShell';
+import AppRoutes from '../router';
 import MantineProviders from './MantineProviders';
 
 const AppProviders = () => {
   return (
     <MantineProviders>
-      <MyAppShell />
+      <AppRoutes />
     </MantineProviders>
   )
 }
