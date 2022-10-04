@@ -23,7 +23,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon --exec ts-node src/index.ts"
+    "dev": "nodemon --exec ts-node routes/index.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
