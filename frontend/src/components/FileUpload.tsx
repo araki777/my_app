@@ -1,6 +1,6 @@
 import { AppShell, Group, Text, useMantineTheme } from '@mantine/core';
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons';
-import { Dropzone, DropzoneProps, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
+import { Dropzone, DropzoneProps, MIME_TYPES } from '@mantine/dropzone';
 import { useState } from 'react';
 import Encoding from 'encoding-japanese'
 import Papa from 'papaparse';
@@ -30,7 +30,7 @@ const FileUpload = (props: Partial<DropzoneProps>) => {
         dynamicTyping: true,
         skipEmptyLines: true,
         complete: (results) => {
-          axios.post(`http://localhost:3000/files/${login_user}`, { name: file.name, fileData: results.data })
+          axios.post(`http://localhost:3000/api/files/${login_user}`, { name: file.name, fileData: results.data })
           .then((_res) => {
             setLoading(false);
           })

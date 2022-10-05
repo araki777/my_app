@@ -10,7 +10,7 @@ const FileTable = () => {
   const [files, setFiles] = useState([])
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/files/${login_user}`).then((res) => {
+    axios.get(`http://localhost:3000/api/files/${login_user}`).then((res) => {
       setFiles(res.data)
     }).catch((_e) => {
       console.log("aaaaaaaaaaa");
@@ -30,11 +30,9 @@ const FileTable = () => {
         <tbody>
           { files.map((file: any) => (
               <tr key={file.id}>
-                <Link to={'/file_table/detail/' + file.id }>
-                  <td>{file.name}</td>
-                  <td>{file.uploadAt}</td>
-                  <td>{file.updatedAt}</td>
-                </Link>
+                <td>{file.name}</td>
+                <td>{file.uploadAt}</td>
+                <td>{file.updatedAt}</td>
               </tr>
                     ))}
         </tbody>
