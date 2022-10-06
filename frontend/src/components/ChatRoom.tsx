@@ -32,6 +32,7 @@ const ChatRoom = () => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
+    const date = new Date();
     socket.emit("chat message", message);
     setMessage("");
   }

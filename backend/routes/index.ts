@@ -13,14 +13,9 @@ const server = http.createServer(app);
 
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-    optionsSuccessStatus: 200,
-  })
-);
+app.use(cors());
 
 app.use('/api/users', user)
 app.use('/api/menus', menu)
