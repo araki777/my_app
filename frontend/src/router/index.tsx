@@ -4,7 +4,7 @@ import FileTable from "../components/FileTable";
 import MyAppShell from "../components/MyAppShell";
 import Page404 from "../components/Page404";
 import FileDetailTable from "../components/FileDetailTable";
-import ChatBot from "../components/ChatBot";
+import ChatRoom from "../components/ChatRoom";
 
 const AppRoutes = () => {
   return (
@@ -16,7 +16,7 @@ const AppRoutes = () => {
           <Route path=""  element={<FileTable />} />
           <Route path="details:id" element={<FileDetailTable />} />
         </Route>
-        <Route path="/chat_bot" element={<ChatBot />} />
+        <Route path="/chat_room" element={<ChatRoom />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>

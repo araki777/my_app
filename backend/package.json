@@ -10,7 +10,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "fp-ts": "^2.12.3",
-    "io-ts": "^2.2.18"
+    "io-ts": "^2.2.18",
+    "socket.io": "^4.5.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
