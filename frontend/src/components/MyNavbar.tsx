@@ -12,7 +12,7 @@ export const MyNavbar = () => {
         <NavLink label="File Table" component={Link} to="/file_table" active={location.pathname === '/file_table'}></NavLink>
       </Navbar.Section>
       <Navbar.Section>
-      <NavLink label="Chat Room" component={Link} to="/chat_room" active={location.pathname === '/chat_room'}></NavLink>
+      <NavLink label="Chat Room" component={Link} to="/chat_login_page" active={location.pathname === '/chat_login_page'}></NavLink>
       </Navbar.Section>
     </Navbar>
   )

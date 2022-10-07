@@ -21,6 +21,8 @@ app.use('/api/users', user)
 app.use('/api/menus', menu)
 app.use('/api/files', file)
 
+let userCount = 0
+
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -30,8 +32,13 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+  userCount++;
+  console.log(`${userCount}名が入室中...`);
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
+    userCount--;
+    console.log(`${userCount}名が入室中...`);
   })
 
   socket.on("chat message", (msg) => {

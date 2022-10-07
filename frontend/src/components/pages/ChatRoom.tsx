@@ -1,26 +1,33 @@
-import { ActionIcon, AppShell, Button } from "@mantine/core"
-import { MyHeader } from "./MyHeader"
-import { MyNavbar } from "./MyNavbar"
+import { ActionIcon } from "@mantine/core"
 import { io } from 'socket.io-client'
 import { Input } from '@mantine/core';
 import React, { useEffect, useState } from "react";
 import { IconSend } from "@tabler/icons";
+import { useLocation } from "react-router-dom"
+import { MessageListArea } from "../organisms/MessageListArea";
+import { MessageContent } from "../../types/MessageContent";
+import { MessageInputArea } from "../organisms/MessageInputArea";
+
+type LoginState = {
+  name: string
+}
 
 const socket = io("http://localhost:3001");
-
 socket.on("connect", () => {
   console.log("socket.connectを出力");
   console.log(socket.connect());
 })
 
 const ChatRoom = () => {
-
-  const [messageList, setMessageList] = useState<string[]>([]);
+  const [messageList, setMessageList] = useState<MessageContent[]>([]);
   const [message, setMessage] = useState("");
+  const location = useLocation();
+  const state = location.state as LoginState
+  const { name } = state;
 
   useEffect(() => {
-    socket.on("chat", (msg) => {
-      setMessageList((messageList) => [...messageList, msg])
+    socket.on("chat", (messageContent) => {
+      setMessageList((messageList) => [...messageList, messageContent])
     })
   }, []);
 
@@ -33,17 +40,20 @@ const ChatRoom = () => {
   ) => {
     e.preventDefault();
     const date = new Date();
-    socket.emit("chat message", message);
+    const messageContent: MessageContent = {
+      name: name,
+      message: message,
+      postAt: date.toLocaleString("ja"),
+    };
+
+    socket.emit("chat message", messageContent);
     setMessage("");
   }
 
   return (
-    <AppShell padding="md" fixed={false} navbar={<MyNavbar />} header={<MyHeader />}>
-      <ul>
-        {messageList.map((data, index) => {
-          return <li key={index}>{data}</li>;
-        })}
-      </ul>
+    <>
+      <MessageListArea messageList={messageList} />
+      <MessageInputArea text={message} onChange={onChangeMessage} onClick={onClickSend} />
       <div className="flex">
         <Input sx={{ textAlign: "center" }} placeholder="" radius="lg" value={message} onChange={onChangeMessage} rightSection={
           <ActionIcon onClick={onClickSend}>
@@ -51,7 +61,7 @@ const ChatRoom = () => {
           </ActionIcon>
         } />
       </div>
-    </AppShell>
+    </>
   )
 }
 export default ChatRoom
